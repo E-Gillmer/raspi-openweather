@@ -7,3 +7,20 @@ Openweathermap with the raspberry pi and a 3.5" LCD
  but is helpful to shutdown the App by clicking on the upper right corner. 
  
 the complete project is located at https://www.hackster.io/Granpino/raspberry-pi-open-weather-display-6f12a7 
+
+
+Fork Changes
+
+Implemented as of 2022-02
+
+Changing Readme to reflect fork
+
+Planned
+
+Change DHT22 sensor to DHT11
+
+ Possibly reassign pin mapping and sensor calls
+
+Possibly remove shutdown corner (For compatibility with companion alert system)
+
+Make Readme look better
