@@ -3,8 +3,8 @@
 # raspi openweather by Granpino. May 2020
 # For a 3.5" or 5" screen with resolution set at 640x320  
 # The /boot/config.txt file needs to be changed first.
-# Rev1.2
-import sys, pygame
+# Rev1.2-0 Update to Python 3
+import sys, pygame      # All packages should be Included with Raspi OS
 from pygame.locals import *
 import time
 import datetime
@@ -15,17 +15,17 @@ pygame.init()
 #==================== change these settings ===============
 settings = {
     'api_key':'xxxxxx',
-    'lat':'42.5602',
-    'lon':'-88.4471',
+    'lat':'45.6280',
+    'lon':'122.6739',
     'temp_unit':'imperial'} #unit can be metric, or imperial
 #============================================================
 Temp_Unit = settings["temp_unit"]
 BASE_URL = "http://api.openweathermap.org/data/2.5/onecall?appid={0}&exclude=minutely,hourly&lat={1}&lon={2}&units={3}"
 
 ###setup
-#degSymF = unichr(0x2109)         # Unicode for Degree F
-degSYM = unichr(0x00B0)          #unicode for degree symbol
-#degSymC = unichr(0x2103)
+#degSymF = chr(0x2109)         # Unicode for Degree F
+degSYM = chr(0x00B0)          #unicode for degree symbol
+#degSymC = chr(0x2103)
 pin = '4' 
 sensor = Adafruit_DHT.DHT22
 
@@ -58,18 +58,18 @@ def on_click():
     print('clicked')
     #   exit has been pressed at upper right corner
     if 531 < click_pos[0] < 600 and 20 < click_pos[1] < 70:  
-	button(0)
+        button(0)
 
 #define action on pressing buttons
 def button(number):
     global set_point
-    print "You pressed button ",number
+    print("You pressed button ", number)
     if number == 0:    # exiting
-	screen.fill(black)
-	pygame.display.flip()
-	time.sleep(2)
-	pygame.quit()
-	sys.exit()
+        screen.fill(black)
+        pygame.display.flip()
+        time.sleep(2)
+        pygame.quit()
+        sys.exit()
 
 def update_weather():
     global temp1 
@@ -195,9 +195,9 @@ lfont = pygame.font.SysFont('sans', 40, bold=1)
 xlfont = pygame.font.SysFont('sans', 80, bold=1)
 
 if Temp_Unit == ("imperial"):  # do not change this
-	degSym = unichr(0x2109)		# Unicode for DegreeF
+	degSym = chr(0x2109)		# Unicode for DegreeF
 else:
-	degSym = unichr(0x2103)		# Unicode for DegreeC
+	degSym = chr(0x2103)		# Unicode for DegreeC
 
 
 def refresh_screen():
@@ -292,12 +292,12 @@ def main():
     while True:
         seconds=(pygame.time.get_ticks() - timer)/1000
         if seconds > 250: # check every 4 min 
-	    timer = pygame.time.get_ticks()
+            timer = pygame.time.get_ticks()
             update_weather() # update indoor and outdoor
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN: #click on logo
                 click_pos = pygame.mouse.get_pos()
-                print click_pos 
+                print(click_pos) 
                 on_click()
 
         if event.type == KEYDOWN:
